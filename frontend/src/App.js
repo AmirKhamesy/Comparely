@@ -1,13 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
-import { getPlaylists, token, logout } from './controllers/spotify';
+import { getPlaylists, token, logout } from './spotify';
 
 const SPOTIFY_LOGIN_URL = 'http://localhost:8888/login'
 
 
 const logPlaylist = async () => {
-  const data = await getPlaylists()
-  console.log(data)
+  try {
+    const data = await getPlaylists()
+    console.log(data)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 function App() {
@@ -17,14 +21,9 @@ function App() {
     setAccessToken(token);
   }, []);
 
-  useEffect(() => {
-    accessToken && accessToken !== '' &&
-      logPlaylist()
-  }, [accessToken]);
-
   return (
     <div >
-      {accessToken ?
+      {!accessToken ?
         <a
           href={SPOTIFY_LOGIN_URL}
         >
@@ -33,6 +32,8 @@ function App() {
         :
         <>
           <p>Logged in</p>
+          <p>{accessToken}</p>
+          <button onClick={logPlaylist}>log</button>
           <button onClick={() => logout()} >Logout</button>
         </>
       }
