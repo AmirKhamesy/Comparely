@@ -17,11 +17,14 @@ const getLocalRefreshToken = () => window.localStorage.getItem('spotify_refresh_
 // Refresh the token
 const refreshAccessToken = async () => {
     try {
-        const { data } = await axios.get(`/refresh_token?refresh_token=${getLocalRefreshToken()}`);
-        const { access_token } = data;
-        setLocalAccessToken(access_token);
-        window.location.reload();
-        return;
+        const refrashToken = getLocalRefreshToken();
+        if (refrashToken) {
+            const { data } = await axios.get(`/refresh_token?refresh_token=${refrashToken}`);
+            const { access_token } = data;
+            setLocalAccessToken(access_token);
+            window.location.reload();
+            return;
+        }
     } catch (e) {
         console.error(e);
     }
@@ -29,7 +32,6 @@ const refreshAccessToken = async () => {
 
 // Get access token off of query params (called on application init)
 export const getAccessToken = () => {
-    console.log("Here")
     const { error, access_token, refresh_token } = getHashParams();
 
     if (error) {
