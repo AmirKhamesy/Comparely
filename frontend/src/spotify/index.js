@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getHashParams } from '../utils';
+import { CLIENT_BASE_URL } from '../lib/constants'
 
 // TOKENS ******************************************************************************************
 const EXPIRATION_TIME = 3600 * 1000; // 3600 seconds * 1000 = 1 hour in milliseconds
@@ -63,7 +64,8 @@ export const logout = () => {
     window.localStorage.removeItem('spotify_token_timestamp');
     window.localStorage.removeItem('spotify_access_token');
     window.localStorage.removeItem('spotify_refresh_token');
-    window.location.reload();
+    window.location.replace(CLIENT_BASE_URL);
+    // window.location.reload();
 };
 
 // API CALLS ***************************************************************************************
