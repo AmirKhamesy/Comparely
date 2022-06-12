@@ -81,3 +81,4 @@ const headers = {
  * https://developer.spotify.com/documentation/web-api/reference/playlists/get-a-list-of-current-users-playlists/
  */
 export const getPlaylists = () => axios.get('https://api.spotify.com/v1/me/playlists', { headers });
+export const getMorePlaylists = (next) => axios.get(next, { headers });
