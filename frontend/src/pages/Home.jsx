@@ -1,32 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { getPlaylists, getMorePlaylists, token, logout } from '../spotify';
+import { getAllPlaylists, token, logout, SPOTIFY_LOGIN_URL } from '../spotify';
 import { Button, Paper, Box, Typography, IconButton } from '@mui/material';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
-const SPOTIFY_LOGIN_URL = 'http://localhost:8888/login'
-const SPOTIFY_PLAYLIST_PULL_LIMIT = 20;
 
-const getAllPlaylists = async () => {
-    try {
-        const response = await getPlaylists()
-        let { items, next, offset, total } = response.data;
-        let all_playlists = [...items]
-        while (total > (offset + SPOTIFY_PLAYLIST_PULL_LIMIT)) {
-            let morePlaylistsResponse = await getMorePlaylists(next);
-            ({ offset, next } = morePlaylistsResponse.data)
-            all_playlists = all_playlists.concat(morePlaylistsResponse.data.items)
-        }
-        return all_playlists
-    } catch (error) {
-        console.log(error)
-    }
-}
+
 export default function Home() {
     const [accessToken, setAccessToken] = useState('');
     const [playlists, setPlaylists] = useState([])
 
     useEffect(() => {
         if (accessToken) {
+            // TODO: Get all user info
+            // TODO: Store user info using redux
             const allPlaylistsPromise = getAllPlaylists()
             allPlaylistsPromise.then(e => setPlaylists(e))
         }

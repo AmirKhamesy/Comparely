@@ -2,6 +2,10 @@ import axios from 'axios';
 import { getHashParams } from '../utils';
 import { CLIENT_BASE_URL } from '../lib/constants'
 
+// Spotify variables
+const SPOTIFY_PLAYLIST_PULL_LIMIT = 20;
+export const SPOTIFY_LOGIN_URL = 'http://localhost:8888/login'
+
 // TOKENS ******************************************************************************************
 const EXPIRATION_TIME = 3600 * 1000; // 3600 seconds * 1000 = 1 hour in milliseconds
 
@@ -82,3 +86,18 @@ const headers = {
  */
 export const getPlaylists = () => axios.get('https://api.spotify.com/v1/me/playlists', { headers });
 export const getMorePlaylists = (next) => axios.get(next, { headers });
+export const getAllPlaylists = async () => {
+    try {
+        const response = await getPlaylists()
+        let { items, next, offset, total } = response.data;
+        let all_playlists = [...items]
+        while (total > (offset + SPOTIFY_PLAYLIST_PULL_LIMIT)) {
+            let morePlaylistsResponse = await getMorePlaylists(next);
+            ({ offset, next } = morePlaylistsResponse.data)
+            all_playlists = all_playlists.concat(morePlaylistsResponse.data.items)
+        }
+        return all_playlists
+    } catch (error) {
+        console.log(error)
+    }
+}
