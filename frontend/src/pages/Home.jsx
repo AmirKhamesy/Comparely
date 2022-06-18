@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getAllPlaylists, token, logout, SPOTIFY_LOGIN_URL } from '../spotify';
 import { Button, Paper, Box, Typography, IconButton } from '@mui/material';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
@@ -62,7 +63,9 @@ export default function Home() {
                     </Paper>
                 </Box>
                 :
-                <>
+                <Box
+                    minHeight="100vh"
+                >
                     <div style={{ flexDirection: "row", display: "flex", justifyContent: "space-between" }}>
                         <p>Logged in</p>
                         <IconButton
@@ -74,11 +77,20 @@ export default function Home() {
                     </div>
                     <div style={{ flexDirection: "column", display: "flex" }}>
                         {
-                            playlists &&
-                            playlists.map((playlist, idx) => <p key={`playlist-${idx}`}>{playlist.name}</p>)
+                            playlists && playlists.length !== 0 ?
+                                playlists.map((playlist, idx) => <p key={`playlist-${idx}`}>{playlist.name}</p>)
+                                :
+                                <Box
+                                    style={{
+                                        marginTop: "40%",
+                                        marginLeft: "45%"
+                                    }}
+                                    color='white'>
+                                    <CircularProgress color="inherit" />
+                                </Box>
                         }
                     </div>
-                </>
+                </Box>
             }
         </div>
     );
