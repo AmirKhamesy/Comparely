@@ -11,11 +11,16 @@ import {
 function App() {
 
   return (
-    <Router>
-      <div >
+    <div >
+      {/* https://mui.com/material-ui/getting-started/installation/#font-icons */}
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      />
+      <Router>
         <Home></Home>
-      </div>
-    </Router>
+      </Router>
+    </div>
   );
 }
 

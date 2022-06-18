@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getPlaylists, getMorePlaylists, token, logout } from '../spotify';
+import { Button } from '@mui/material';
 
 const SPOTIFY_LOGIN_URL = 'http://localhost:8888/login'
 const SPOTIFY_PLAYLIST_PULL_LIMIT = 20;
@@ -46,16 +47,16 @@ export default function Home() {
     return (
         <div >
             {!accessToken ?
-                <a
+                <Button variant="outlined"
                     href={SPOTIFY_LOGIN_URL}
                 >
                     Login with spotify
-                </a>
+                </Button>
                 :
                 <>
                     <div style={{ flexDirection: "row", display: "flex", justifyContent: "space-between" }}>
                         <p>Logged in</p>
-                        <button onClick={logout} >Logout</button>
+                        <Button variant="outlined" onClick={logout} >Logout</Button>
                     </div>
                     <div style={{ flexDirection: "column", display: "flex" }}>
                         {
