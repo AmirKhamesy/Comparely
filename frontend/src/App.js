@@ -7,20 +7,47 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { styled } from '@mui/system';
+
+// https://github.com/johnpolacek/animated-gradient-background-generator
+// TODO: Fix animation
+// TODO: Move to css files?
+const StyledBackgroundWrapper = styled('div')({
+  background: "linear-gradient(247deg,#b600ff,#2907df)",
+  backgroundSize: "120% 120%",
+  animation: "gradient-animation 6s ease infinite",
+  width: "100vw",
+  height: "100vh",
+
+  "@keyframes gradient-animation": {
+    '0%': {
+      backgroundPosition: "0% 50%"
+    },
+    "50%": {
+      backgroundPosition: "100% 50%"
+    },
+    "100%": {
+      backgroundPosition: "0% 50%"
+    }
+  }
+})
+
 
 function App() {
 
   return (
-    <div >
+    <>
       {/* https://mui.com/material-ui/getting-started/installation/#font-icons */}
-      <link
+      < link
         rel="stylesheet"
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
       <Router>
-        <Home></Home>
+        <StyledBackgroundWrapper >
+          <Home></Home>
+        </StyledBackgroundWrapper>
       </Router>
-    </div>
+    </>
   );
 }
 
