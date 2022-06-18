@@ -28,7 +28,6 @@ export default function Home() {
     useEffect(() => {
         if (accessToken) {
             const allPlaylistsPromise = getAllPlaylists()
-
             allPlaylistsPromise.then(e => setPlaylists(e))
         }
     }, [accessToken])
@@ -39,10 +38,14 @@ export default function Home() {
         }
     }, [playlists])
 
+    const removeHash = () => {
+        window.history.pushState("", document.title, window.location.pathname
+            + window.location.search);
+    }
 
     useEffect(() => {
         setAccessToken(token);
-
+        removeHash();
     }, []);
 
     return (

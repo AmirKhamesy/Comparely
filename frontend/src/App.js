@@ -16,8 +16,8 @@ const StyledBackgroundWrapper = styled('div')({
   background: "linear-gradient(247deg,#b600ff,#2907df)",
   backgroundSize: "120% 120%",
   animation: "gradient-animation 6s ease infinite",
-  width: "100vw",
-  height: "100vh",
+  width: "100%",
+  height: "100%",
 
   "@keyframes gradient-animation": {
     '0%': {
