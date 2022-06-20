@@ -21,6 +21,10 @@ import Tooltip from "@mui/material/Tooltip";
 export default function Home() {
   const [accessToken, setAccessToken] = useState("");
   const [playlists, setPlaylists] = useState([]);
+  const [position, setPosition] = React.useState({
+    x: undefined,
+    y: undefined,
+  });
 
   useEffect(() => {
     if (accessToken) {
@@ -115,7 +119,7 @@ export default function Home() {
                 <Grid
                   align="center"
                   justify="center"
-                  padding={1}
+                  padding={2}
                   item
                   xs={2}
                   sm={4}
@@ -123,16 +127,35 @@ export default function Home() {
                   key={`playlist-${idx}`}
                 >
                   <Card sx={{ maxWidth: 250 }}>
-                    <Tooltip title={playlist.name}>
-                      <CardMedia
-                        component="img"
-                        height="250px"
-                        image={`${
-                          playlist.images[0]?.url && playlist.images[0].url
-                            ? playlist.images[0].url
-                            : "https://via.placeholder.com/250x250.png"
-                        }`}
-                      />
+                    <CardMedia
+                      component="img"
+                      height="250px"
+                      image={`${
+                        playlist.images[0]?.url && playlist.images[0].url
+                          ? playlist.images[0].url
+                          : "https://via.placeholder.com/250x250.png"
+                      }`}
+                    />
+                    <Tooltip
+                      title={playlist.name}
+                      onMouseMove={(e) =>
+                        setPosition({ x: e.pageX, y: e.pageY })
+                      }
+                      PopperProps={{
+                        anchorEl: {
+                          clientHeight: 0,
+                          clientWidth: 0,
+                          getBoundingClientRect: () => ({
+                            top: position.y,
+                            left: position.x,
+                            right: position.x,
+                            bottom: position.y,
+                            width: 0,
+                            height: 0,
+                          }),
+                        },
+                      }}
+                    >
                       <CardContent>
                         <Typography
                           noWrap
