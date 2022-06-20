@@ -137,7 +137,7 @@ export default function Home() {
                       }`}
                     />
                     <CardContent>
-                      <Tooltip title={playlist.name} placement="bottom">
+                      <Tooltip title={playlist.name}>
                         <Typography
                           noWrap
                           tool={playlist.name}
