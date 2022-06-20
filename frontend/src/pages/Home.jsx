@@ -136,27 +136,8 @@ export default function Home() {
                           : "https://via.placeholder.com/250x250.png"
                       }`}
                     />
-                    <Tooltip
-                      title={playlist.name}
-                      onMouseMove={(e) =>
-                        setPosition({ x: e.pageX, y: e.pageY })
-                      }
-                      PopperProps={{
-                        anchorEl: {
-                          clientHeight: 0,
-                          clientWidth: 0,
-                          getBoundingClientRect: () => ({
-                            top: position.y,
-                            left: position.x,
-                            right: position.x,
-                            bottom: position.y,
-                            width: 0,
-                            height: 0,
-                          }),
-                        },
-                      }}
-                    >
-                      <CardContent>
+                    <CardContent>
+                      <Tooltip title={playlist.name} placement="bottom">
                         <Typography
                           noWrap
                           tool={playlist.name}
@@ -165,8 +146,8 @@ export default function Home() {
                         >
                           {playlist.name}
                         </Typography>
-                      </CardContent>
-                    </Tooltip>
+                      </Tooltip>
+                    </CardContent>
                   </Card>
                 </Grid>
               ))}
