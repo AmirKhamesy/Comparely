@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getAllPlaylists, token, logout, SPOTIFY_LOGIN_URL } from '../spotify';
-import { Button, Paper, Box, Typography, IconButton } from '@mui/material';
+import { Button, Paper, Box, Typography, IconButton, Toolbar, AppBar, Card, CardMedia, CardContent, Grid } from '@mui/material';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import CircularProgress from '@mui/material/CircularProgress';
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 
@@ -66,19 +67,58 @@ export default function Home() {
                 <Box
                     minHeight="100vh"
                 >
-                    <div style={{ flexDirection: "row", display: "flex", justifyContent: "space-between" }}>
-                        <p>Logged in</p>
-                        <IconButton
-                            variant="outlined"
-                            onClick={logout}>
-                            Logout
-                        </IconButton>
-
-                    </div>
-                    <div style={{ flexDirection: "column", display: "flex" }}>
+                    <AppBar position="static" color="inherit">
+                        <Toolbar>
+                            <IconButton
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                                aria-label="menu"
+                                sx={{ mr: 2 }}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                                Comparly
+                            </Typography>
+                            <Button color="inherit" onClick={logout}>
+                                <Typography>
+                                    Sign out
+                                </Typography>
+                            </Button>
+                        </Toolbar>
+                    </AppBar>
+                    <Box>
                         {
                             playlists && playlists.length !== 0 ?
-                                playlists.map((playlist, idx) => <p key={`playlist-${idx}`}>{playlist.name}</p>)
+                                <Box margin={2} border='10px solid red' >
+                                    <Grid container spacing={2}>
+
+                                        {
+                                            playlists.map((playlist, idx) =>
+                                                <Grid item sm={12} m={3} key={`playlist-${idx}`}>
+                                                    <Card sx={{ maxWidth: 345 }} >
+                                                        <CardMedia
+                                                            component="img"
+                                                            height="140"
+                                                            image={`${playlist.images[0]?.url && playlist.images[0].url ?
+                                                                playlist.images[0].url
+                                                                :
+                                                                'https://via.placeholder.com/345x140.png'
+                                                                }`}
+                                                        />
+                                                        <CardContent>
+                                                            <Typography variant="h6" component="div">
+                                                                {playlist.name}
+                                                            </Typography>
+
+                                                        </CardContent>
+                                                    </Card>
+                                                </Grid>
+                                            )
+                                        }
+                                    </Grid>
+                                </Box>
                                 :
                                 <Box
                                     style={{
@@ -89,9 +129,9 @@ export default function Home() {
                                     <CircularProgress color="inherit" />
                                 </Box>
                         }
-                    </div>
+                    </Box>
                 </Box>
             }
-        </div>
+        </div >
     );
 }
