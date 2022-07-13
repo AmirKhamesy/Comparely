@@ -1,11 +1,11 @@
 
 import React from 'react';
 import Home from './pages/Home';
+import CompareSpotifyPlaylist from './pages/CompareSpotifyPlaylist';
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
-  Link
 } from "react-router-dom";
 import { styled } from '@mui/system';
 
@@ -44,7 +44,11 @@ function App() {
       />
       <Router>
         <StyledBackgroundWrapper >
-          <Home></Home>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/spotify-playlist' element={<CompareSpotifyPlaylist />} />
+
+          </Routes>
         </StyledBackgroundWrapper>
       </Router>
     </>
