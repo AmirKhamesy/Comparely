@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { styled } from '@mui/system';
 import Spotify from './pages/Spotify';
+import SpotifyPlaylist from './pages/SpotifyPlaylist';
 
 // https://github.com/johnpolacek/animated-gradient-background-generator
 // TODO: Fix animation
@@ -45,8 +46,10 @@ function App() {
       <Router>
         <StyledBackgroundWrapper >
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/spotify' element={<Spotify />} />
+            <Route path='' element={<Home />} />
+            <Route path='Spotify' element={<Spotify />}>
+              <Route path=':playlistID' element={<SpotifyPlaylist />} />
+            </Route>
 
           </Routes>
         </StyledBackgroundWrapper>
