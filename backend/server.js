@@ -10,7 +10,7 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const stateKey = 'spotify_auth_state';
 let REDIRECT_URI = 'http://localhost:8888/callback';
-let FRONTEND_URI = 'http://localhost:3000';
+let FRONTEND_URI = 'http://localhost:3000/Spotify';
 const PORT = 8888;
 
 const app = express();
