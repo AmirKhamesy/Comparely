@@ -23,7 +23,7 @@ export default function Spotify() {
 
   const navigate = useNavigate();
   const navigateToSpotifyComparePage = useCallback(
-    () => navigate("/spotify-playlist", { replace: true }),
+    () => navigate("/spotify-playlist"),
     [navigate]
   );
 

@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { getAllPlaylists, token, SPOTIFY_LOGIN_URL } from "../spotify";
+import React, { useState, useEffect, useCallback } from "react";
+import { token, SPOTIFY_LOGIN_URL } from "../spotify";
 import { Button, Paper, Box, Typography } from "@mui/material";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [accessToken, setAccessToken] = useState("");
-  const [playlists, setPlaylists] = useState([]);
+
+  const navigate = useNavigate();
+  const navigateToSpotifyPage = useCallback(
+    () => navigate("/Spotify"),
+    [navigate]
+  );
+
   useEffect(() => {
     if (accessToken) {
       // TODO: Get all user info
       // TODO: Store user info using redux
-      const allPlaylistsPromise = getAllPlaylists();
-      allPlaylistsPromise.then((e) => setPlaylists(e));
+      navigateToSpotifyPage();
     }
   }, [accessToken]);
-
-  useEffect(() => {
-    if (playlists) {
-      console.log(playlists);
-    }
-  }, [playlists]);
 
   const removeHash = () => {
     window.history.pushState(

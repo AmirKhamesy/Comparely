@@ -1,7 +1,6 @@
 
 import React from 'react';
 import Home from './pages/Home';
-import CompareSpotifyPlaylist from './pages/CompareSpotifyPlaylist';
 import {
   BrowserRouter as Router,
   Routes,
@@ -47,7 +46,6 @@ function App() {
         <StyledBackgroundWrapper >
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/spotify-playlist' element={<CompareSpotifyPlaylist />} />
             <Route path='/spotify' element={<Spotify />} />
 
           </Routes>
