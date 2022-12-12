@@ -35,34 +35,45 @@ export default function SpotifyPlaylist() {
           <CircularProgress color="inherit" />
         </Box>
       ) : (
-        <Stack sx={{ border: "2px solid red" }} p={3}>
-          <Typography
-            variant="h2"
-            fontWeight="bold"
-            color="White"
-            textAlign="center"
-            m={3}
-            sx={{ flexGrow: 1 }}
-          >
-            {playlistMetaData.name}
-          </Typography>
-          <Typography color="White" textAlign="center">
-            {playlistMetaData.tracks.total}
-          </Typography>
+        <Stack p={3}>
+          <Stack m={2}>
+            <Typography
+              variant="h2"
+              fontWeight="bold"
+              color="White"
+              textAlign="center"
+              m={3}
+              sx={{ flexGrow: 1 }}
+            >
+              {playlistMetaData.name}
+            </Typography>
+            <Typography color="White" textAlign="center">
+              {playlistMetaData.tracks.total} song
+              {playlistMetaData.tracks.total.length !== 1 && "s"}
+            </Typography>
+          </Stack>
           <Stack spacing={2}>
             {songs.map((song, idx) => (
-              <Box
-                bgcolor="#9AA0AD"
-                sx={{ opacity: 0.75 }}
+              <Stack
+                bgcolor={"#9AA0AD99"}
                 p={2}
+                spacing={3}
                 borderRadius={3}
                 key={`song-${idx}`}
+                direction="row"
+                alignItems="center"
               >
-                <Typography variant="h4">{song.track.name}</Typography>
-                <Typography>
-                  {song.track.artists.map((artist) => artist.name).join(", ")}
-                </Typography>
-              </Box>
+                <img src={song.track.album.images[2].url} />{" "}
+                {/* TODO: Choose image size thats appropriate for the screen size*/}
+                <Stack>
+                  <Typography variant="h6" color="white">
+                    {song.track.name}
+                  </Typography>
+                  <Typography color="#FFFFFF90">
+                    {song.track.artists.map((artist) => artist.name).join(", ")}
+                  </Typography>
+                </Stack>
+              </Stack>
             ))}
           </Stack>
         </Stack>
