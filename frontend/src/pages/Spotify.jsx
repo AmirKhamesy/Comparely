@@ -102,7 +102,7 @@ export default function Spotify() {
                       >
                         <Link
                           key={`playlist-link-${idx}`}
-                          to={`${playlist.id}`}
+                          to={`Playlist/${playlist.id}`}
                           style={{ textDecoration: "none" }}
                         >
                           <Card sx={{ maxWidth: 250 }}>

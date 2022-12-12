@@ -48,7 +48,7 @@ function App() {
           <Routes>
             <Route path='' element={<Home />} />
             <Route path='Spotify' element={<Spotify />}>
-              <Route path=':playlistID' element={<SpotifyPlaylist />} />
+              <Route path='Playlist/:playlistID' element={<SpotifyPlaylist />} />
             </Route>
 
           </Routes>
