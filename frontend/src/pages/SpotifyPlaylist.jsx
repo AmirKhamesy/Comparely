@@ -14,12 +14,12 @@ export default function SpotifyPlaylist() {
   useEffect(() => {
     setLoading(true);
     getPlaylistMetadata(playlistID).then((data) => setSongsAndMetadata(data));
-    setLoading(false);
   }, []);
 
   const setSongsAndMetadata = (data) => {
     setSongs(data.data.tracks.items);
     setPlaylistMetaData(data.data);
+    setLoading(false);
   };
 
   return (
