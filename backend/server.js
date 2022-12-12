@@ -80,7 +80,6 @@ app.get('/callback', function (req, res) {
     }
 });
 
-
 app.get('/refresh_token', function (req, res) {
     // requesting access token from refresh token
     const refresh_token = req.query.refresh_token;
@@ -99,7 +98,6 @@ app.get('/refresh_token', function (req, res) {
     };
 
     request.post(authOptions, function (error, response, body) {
-        console.log(body)
         if (!error && response.statusCode === 200) {
             const access_token = body.access_token;
             res.send({ access_token });

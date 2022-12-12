@@ -6,6 +6,9 @@ import { CLIENT_BASE_URL } from '../lib/constants'
 const SPOTIFY_PLAYLIST_PULL_LIMIT = 20;
 export const SPOTIFY_LOGIN_URL = 'http://localhost:8888/login'
 
+//Constants TODO: Move to confis/env file
+const SERVER_URL = 'http://localhost:8888/'
+
 // TOKENS ******************************************************************************************
 const EXPIRATION_TIME = 3600 * 1000; // 3600 seconds * 1000 = 1 hour in milliseconds
 
@@ -22,9 +25,9 @@ const getLocalRefreshToken = () => window.localStorage.getItem('spotify_refresh_
 // Refresh the token
 const refreshAccessToken = async () => {
     try {
-        const refrashToken = getLocalRefreshToken();
-        if (refrashToken) {
-            const { data } = await axios.get(`/refresh_token?refresh_token=${refrashToken}`);
+        const refreshToken = getLocalRefreshToken();
+        if (refreshToken) {
+            const { data } = await axios.get(`${SERVER_URL}refresh_token?refresh_token=${refreshToken}`);
             const { access_token } = data;
             setLocalAccessToken(access_token);
             window.location.reload();
