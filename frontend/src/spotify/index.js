@@ -101,3 +101,9 @@ export const getAllPlaylists = async () => {
         console.log(error)
     }
 }
+/**
+ * Get a List of Current a playlists metadata
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-playlist
+ */
+export const getPlaylistMetadata = (playlist_id) => axios.get(`https://api.spotify.com/v1/playlists/${playlist_id}`, { headers });
+
