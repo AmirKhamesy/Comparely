@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Box, Typography, Stack } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import { getPlaylistItems, getPlaylistMetadata } from "../spotify";
+import { getMorePlaylists, getPlaylistMetadata } from "../spotify";
 
 export default function SpotifyPlaylist() {
   const { playlistID } = useParams();
@@ -14,11 +14,12 @@ export default function SpotifyPlaylist() {
   useEffect(() => {
     setLoading(true);
     getPlaylistMetadata(playlistID).then((data) => setSongsAndMetadata(data));
-  }, []);
+  }, [playlistID]);
 
   const setSongsAndMetadata = (data) => {
     setSongs(data.data.tracks.items);
     setPlaylistMetaData(data.data);
+    getMorePlaylists(data.data.tracks.next).then((data) => console.log(data));
     setLoading(false);
   };
 
@@ -63,7 +64,10 @@ export default function SpotifyPlaylist() {
                 direction="row"
                 alignItems="center"
               >
-                <img src={song.track.album.images[2].url} />{" "}
+                <img
+                  src={song.track.album.images[2].url}
+                  alt={song.track.name}
+                />
                 {/* TODO: Choose image size thats appropriate for the screen size*/}
                 <Stack>
                   <Typography variant="h6" color="white">

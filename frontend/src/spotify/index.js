@@ -104,6 +104,8 @@ export const getAllPlaylists = async () => {
         console.log(error)
     }
 }
+
+
 /**
  * Get a List of Current a playlists metadata
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-playlist
