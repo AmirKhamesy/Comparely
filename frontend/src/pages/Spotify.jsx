@@ -105,7 +105,14 @@ export default function Spotify() {
                           to={`Playlist/${playlist.id}`}
                           style={{ textDecoration: "none" }}
                         >
-                          <Card sx={{ maxWidth: 250 }}>
+                          <Card
+                            sx={{
+                              maxWidth: 250,
+                              ":hover": {
+                                boxShadow: 20, // theme.shadows[20]
+                              },
+                            }}
+                          >
                             <CardMedia
                               component="img"
                               height="250px"
